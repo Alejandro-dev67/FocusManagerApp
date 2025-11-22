@@ -11,7 +11,7 @@ CORS(app)
 app.register_blueprint(task_routes)
 app.register_blueprint(user_routes)
 
-# 🔹 Rutas del frontend
+# Rutas del front
 @app.route('/login')
 def home():
     return render_template("login_register.html")
@@ -23,7 +23,7 @@ def dashboard():
 
 from flask import redirect
 
-# 🔹 Redirigir URLs con .html a la versión sin extensión
+# Redirigir URLs 
 @app.route("/<path:filename>.html")
 def remove_html(filename):
     return redirect(f"/{filename}")

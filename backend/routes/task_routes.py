@@ -1,4 +1,3 @@
-# backend/routes/task_routes.py
 from flask import Blueprint, request, jsonify
 from bson import ObjectId
 from database.database import tareas_collection, db
@@ -8,7 +7,7 @@ task_routes = Blueprint("task_routes", __name__)
 def get_user():
     return request.headers.get("X-User")
 
-# Crear tarea (POST /api/tareas)
+# Crear tarea 
 @task_routes.route("/api/tareas", methods=["POST"])
 def crear_tarea():
     user = get_user()
@@ -28,7 +27,7 @@ def crear_tarea():
     tarea["_id"] = str(res.inserted_id)
     return jsonify(tarea), 201
 
-# Obtener tareas (GET /api/tareas?board_id=...)
+# Obtener tareas 
 @task_routes.route("/api/tareas", methods=["GET"])
 def obtener_tareas():
     user = get_user()
@@ -43,7 +42,7 @@ def obtener_tareas():
         tareas.append(t)
     return jsonify(tareas), 200
 
-# Actualizar tarea (PUT /api/tareas/<id>)
+# Actualizar tarea
 @task_routes.route("/api/tareas/<id>", methods=["PUT"])
 def actualizar_tarea(id):
     user = get_user()
@@ -54,7 +53,7 @@ def actualizar_tarea(id):
     t["_id"] = str(t["_id"])
     return jsonify(t), 200
 
-# Eliminar tarea (DELETE /api/tareas/<id>)
+# Eliminar tarea
 @task_routes.route("/api/tareas/<id>", methods=["DELETE"])
 def eliminar_tarea(id):
     user = get_user()
@@ -62,7 +61,7 @@ def eliminar_tarea(id):
     tareas_collection.delete_one({"_id": ObjectId(id), "usuario": user})
     return jsonify({"mensaje":"eliminada"}), 200
 
-# Calendario: get tareas por fecha (GET /api/calendar?date=YYYY-MM-DD)
+# Calendario
 @task_routes.route("/api/calendar", methods=["GET"])
 def calendar():
     user = get_user()

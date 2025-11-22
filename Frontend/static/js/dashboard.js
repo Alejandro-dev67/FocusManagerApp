@@ -1,6 +1,3 @@
-// Dashboard.js — maneja columnas por fecha, modal y DnD vertical en columna.
-// Requiere que en localStorage tengas "fm_usuario" con {nombre, correo} (igual que tu login_register).
-
 const usuario = JSON.parse(localStorage.getItem("fm_usuario"));
 if (!usuario) location.href = "/login";
 

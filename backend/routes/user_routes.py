@@ -5,7 +5,7 @@ from database.database import usuarios_collection
 
 user_routes = Blueprint("user_routes", __name__)
 
-# 🔹 Registro de usuario
+# Registro de usuario
 @user_routes.route("/api/usuarios/registro", methods=["POST"])
 def registrar_usuario():
     data = request.json
@@ -30,7 +30,7 @@ def registrar_usuario():
     return jsonify({"mensaje": "Usuario registrado correctamente"}), 201
 
 
-# 🔹 Login
+# Login
 @user_routes.route("/api/usuarios/login", methods=["POST"])
 def login_usuario():
     data = request.json
