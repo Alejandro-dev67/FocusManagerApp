@@ -14,11 +14,8 @@ app.register_blueprint(user_routes)
 # 🔹 Rutas del frontend
 @app.route('/login')
 def home():
-    return render_template("login.html")
+    return render_template("login_register.html")
 
-@app.route("/register")
-def register():
-    return render_template("register.html")
 
 @app.route("/dashboard")
 def dashboard():

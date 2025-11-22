@@ -1,59 +1,67 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Dashboard – FocusManager</title>
-    <link rel="stylesheet" href="/static/css/dashboard.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Dashboard | FocusManager</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
 </head>
 <body>
-
-    <!-- Barra superior -->
-    <header class="top-bar">
-        <h2 class="title">FocusManager</h2>
-        <button id="logoutBtn" class="logout">Cerrar sesión</button>
-    </header>
-
-    <!-- Contenedor principal -->
-    <main class="container">
-
-        <!-- Botón para añadir tarea -->
-        <div id="addTaskCard" class="add-card">
-            + Añadir una tarea
-        </div>
-
-        <!-- Contenedor de tareas -->
-        <div id="taskList" class="task-list"></div>
-
-    </main>
-
-    <!-- Modal crear tarea -->
-    <div id="taskModal" class="modal hidden">
-        <div class="modal-content">
-            <h3>Crear nueva tarea</h3>
-
-            <label>Título</label>
-            <input id="titulo" type="text">
-
-            <label>Descripción</label>
-            <textarea id="descripcion"></textarea>
-
-            <label>Fecha</label>
-            <input id="fecha" type="date">
-
-            <label>Prioridad</label>
-            <select id="prioridad">
-                <option>Alta</option>
-                <option selected>Media</option>
-                <option>Baja</option>
-            </select>
-
-            <div class="modal-actions">
-                <button id="cancelBtn" class="cancel">Cancelar</button>
-                <button id="saveTaskBtn" class="save">Guardar</button>
-            </div>
-        </div>
+  <header class="top-bar">
+    <div class="left-title">
+      <h1 class="title">FocusManager</h1>
     </div>
 
-    <script src="/static/js/dashboard.js"></script>
+    <div class="user-area" id="userArea">
+      <button id="userBtn" class="user-btn">
+        <span id="userNameDisplay">Usuario</span>
+      </button>
+      <div id="userDropdown" class="user-dropdown hidden">
+        <button id="logoutBtn" class="logout">Cerrar sesión</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="board-wrap">
+    <div class="board-scroll" id="boardScroll">
+      <!-- Añadir tarjeta siempre visible -->
+      <div class="column add-column" id="addColumn">
+        <button id="addTaskCard" class="add-card">+ Añadir una tarea</button>
+      </div>
+
+      <!-- Columnas por fecha se insertan aquí -->
+      <div id="columnsContainer" class="columns-container"></div>
+    </div>
+  </main>
+
+  <!-- Modal crear / editar tarea -->
+  <div id="taskModal" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-box" id="modalBox">
+      <h3 class="modal-title">Crear nueva tarea</h3>
+
+      <label class="label">Título</label>
+      <input id="titulo" class="input" type="text" maxlength="120">
+
+      <label class="label">Descripción</label>
+      <textarea id="descripcion" class="textarea" rows="4"></textarea>
+
+      <label class="label">Fecha límite</label>
+      <input id="fecha" class="input" type="date">
+
+      <label class="label">Prioridad</label>
+      <select id="prioridad" class="input">
+        <option value="Alta">Alta</option>
+        <option value="Media" selected>Media</option>
+        <option value="Baja">Baja</option>
+      </select>
+
+      <div class="modal-actions">
+        <button id="cancelBtn" class="btn cancel">Cancelar</button>
+        <button id="saveTaskBtn" class="btn save">Guardar</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
 </body>
 </html>

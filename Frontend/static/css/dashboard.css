@@ -1,129 +1,177 @@
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #5a004f, #2c002e);
-    color: #fff;
+/* Colores pedidos:
+   fondo general: #26211D
+   top-bar oscuro: #171412
+   formulario modal: #1F1B17
+   texto blanco: #FFFFFF
+   subtítulos / texto secundario: #74706C
+*/
+
+:root{
+  --bg: #26211D;
+  --top: #171412;
+  --form: #1F1B17;
+  --text: #FFFFFF;
+  --muted: #74706C;
+  --card: rgba(255,255,255,0.04);
+  --card-strong: rgba(0,0,0,0.35);
 }
 
-/* Barra superior */
-.top-bar {
-    background: rgba(0, 0, 0, 0.25);
-    padding: 15px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    backdrop-filter: blur(5px);
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;font-family:Inter, "Segoe UI", Arial; background:var(--bg); color:var(--muted);}
+
+/* Top bar */
+.top-bar{
+  height:68px;
+  background: linear-gradient(90deg, var(--top), rgba(23,20,18,0.9));
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding: 0 22px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+.title{color:var(--text); font-size:22px; margin:0; font-weight:600;}
+.left-title{display:flex; align-items:center; gap:10px;}
+
+/* user button */
+.user-area{position:relative;}
+.user-btn{
+  background:transparent;
+  border:none;
+  color:var(--muted);
+  padding:8px 12px;
+  border-radius:8px;
+  cursor:pointer;
+  transition: all .15s ease;
+  font-weight:600;
+}
+.user-btn:hover{ background: rgba(255,255,255,0.03); color:var(--text); }
+
+/* dropdown */
+.user-dropdown{
+  position:absolute;
+  right:0;
+  top:46px;
+  background: rgba(0,0,0,0.4);
+  border-radius:8px;
+  padding:8px;
+  min-width:140px;
+}
+.user-dropdown button{display:block;width:100%;border:none;background:transparent;color:var(--text);padding:8px;border-radius:6px;cursor:pointer}
+.user-dropdown button:hover{background:rgba(255,255,255,0.03)}
+
+/* Board area */
+.board-wrap{padding:20px;height:calc(100vh - 68px);overflow:hidden;}
+.board-scroll{display:flex; height:100%; gap:18px; align-items:flex-start; overflow-x:auto; padding-bottom:20px;}
+
+/* Add column */
+.add-column{flex:0 0 auto; display:flex; align-items:flex-start; padding-left:12px;}
+.add-card{
+  background:var(--card-strong);
+  border-radius:12px;
+  min-width:180px;
+  padding:18px;
+  color:var(--text);
+  font-weight:600;
+  cursor:pointer;
+  border: 1px solid rgba(255,255,255,0.03);
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+.add-card:hover{ transform:translateY(-4px); box-shadow:0 6px 20px rgba(0,0,0,0.6); }
+
+/* Columns container holds date columns horizontally */
+.columns-container{display:flex; gap:18px; padding-left:6px;}
+
+/* single column */
+.column{
+  background: transparent;
+  min-width:280px;
+  max-width:320px;
+  flex: 0 0 auto;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
 }
 
-.title {
-    margin: 0;
-    font-size: 22px;
+/* column header (date) */
+.column-header{
+  color:var(--text);
+  font-weight:700;
+  font-size:14px;
+  margin-bottom:4px;
 }
 
-.logout {
-    background: #d9534f;
-    border: none;
-    padding: 8px 15px;
-    color: white;
-    border-radius: 6px;
-    cursor: pointer;
+/* vertical stack of cards */
+.card-stack{
+  background: rgba(255,255,255,0.02);
+  border-radius:10px;
+  padding:12px;
+  min-height:80px;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  max-height:75vh;
+  overflow:auto;
 }
 
-/* Contenedor principal */
-.container {
-    padding: 30px;
-    max-width: 700px;
-    margin: auto;
+/* task card */
+.task-card{
+  background: var(--card);
+  border-radius:10px;
+  padding:12px 12px 10px 12px;
+  color:var(--text);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.35);
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  cursor:grab;
+  transition: transform .12s ease, box-shadow .12s ease;
 }
+.task-card.dragging{opacity:0.6; transform:scale(.995);}
+.task-card:hover{ transform:translateY(-4px); box-shadow:0 8px 30px rgba(0,0,0,0.5);}
 
-/* Tarjeta Añadir tarea */
-.add-card {
-    background: rgba(255, 255, 255, 0.15);
-    padding: 18px;
-    border-radius: 12px;
-    text-align: center;
-    cursor: pointer;
-    font-size: 18px;
-    transition: 0.3s;
+/* priority circle */
+.prio{
+  width:12px;height:12px;border-radius:50%;display:inline-block;margin-right:8px;vertical-align:middle;
 }
+.prio.high{background:#E63B3B;}   /* rojo */
+.prio.medium{background:#F2C94C;} /* amarillo */
+.prio.low{background:#44C27B;}    /* verde */
 
-.add-card:hover {
-    background: rgba(255, 255, 255, 0.25);
-}
+/* card header row */
+.card-head{display:flex;align-items:center;justify-content:space-between;}
+.card-title{font-weight:700;color:var(--text);font-size:15px;}
 
-/* Lista de tareas */
-.task-list {
-    margin-top: 20px;
-}
+/* small text */
+.card-desc{color:var(--muted);font-size:13px;white-space:pre-wrap;word-break:break-word;}
+.card-meta{color:var(--muted);font-size:12px;}
 
-.task-item {
-    background: rgba(255, 255, 255, 0.12);
-    padding: 15px;
-    border-radius: 10px;
-    margin-bottom: 12px;
+/* action buttons on card */
+.card-actions{display:flex;gap:8px;align-items:center; margin-top:6px;}
+.icon-btn{
+  width:36px;height:30px;border-radius:8px;border:none;background:rgba(255,255,255,0.03);color:var(--text);cursor:pointer;
+  display:flex;align-items:center;justify-content:center;font-size:14px;
 }
+.icon-btn.del{background:rgba(255,0,0,0.06);color:#ffb3b3}
+.icon-btn.check{background:rgba(0,255,0,0.06);color:#bff3c7}
 
-.task-item h4 {
-    margin: 0 0 8px;
-}
+/* modal */
+.modal{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.6);padding:20px;z-index:80;opacity:0;pointer-events:none;transition:opacity .18s ease;}
+.modal.show{opacity:1;pointer-events:auto;}
+.modal-box{width:360px;background:var(--form);border-radius:12px;padding:20px;box-shadow:0 12px 40px rgba(0,0,0,0.6); transform: translateY(8px); transition: transform .18s ease; color:var(--muted);}
+.modal.show .modal-box{transform:translateY(0);}
 
-.task-item small {
-    opacity: 0.8;
+.modal-title{color:var(--text);margin:0 0 12px 0;font-size:18px;}
+.label{display:block;color:var(--muted);margin-bottom:6px;margin-top:6px;font-size:13px;}
+.input, .textarea, .select{
+  width:100%;padding:10px;border-radius:8px;border:none;background:rgba(0,0,0,0.25);color:var(--text)
 }
+.textarea{min-height:90px;resize:vertical;}
+.modal-actions{display:flex;justify-content:space-between;margin-top:12px;}
+.btn{padding:8px 14px;border-radius:8px;border:none;cursor:pointer}
+.btn.save{background:#2F9E44;color:white}
+.btn.cancel{background:#D9534F;color:white}
 
-/* Modal */
-.modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.6);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.hidden {
-    display: none;
-}
-
-.modal-content {
-    background: #2c0032;
-    padding: 25px;
-    border-radius: 12px;
-    width: 300px;
-}
-
-.modal-content input,
-.modal-content textarea,
-.modal-content select {
-    width: 100%;
-    margin-bottom: 12px;
-    padding: 8px;
-    border-radius: 6px;
-    border: none;
-}
-
-.save {
-    background: #4CAF50;
-    border: none;
-    padding: 8px 15px;
-    color: white;
-    border-radius: 6px;
-    cursor: pointer;
-}
-
-.cancel {
-    background: #d9534f;
-    border: none;
-    padding: 8px 15px;
-    color: white;
-    border-radius: 6px;
-    cursor: pointer;
-}
-
-.modal-actions {
-    display: flex;
-    justify-content: space-between;
-}
+/* scrollbar small */
+.card-stack::-webkit-scrollbar, .board-scroll::-webkit-scrollbar {height:8px;width:8px}
+.card-stack::-webkit-scrollbar-thumb, .board-scroll::-webkit-scrollbar-thumb {background:rgba(255,255,255,0.06);border-radius:8px}
