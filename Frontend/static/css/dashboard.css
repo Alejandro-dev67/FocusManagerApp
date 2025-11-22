@@ -1,0 +1,129 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #5a004f, #2c002e);
+    color: #fff;
+}
+
+/* Barra superior */
+.top-bar {
+    background: rgba(0, 0, 0, 0.25);
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    backdrop-filter: blur(5px);
+}
+
+.title {
+    margin: 0;
+    font-size: 22px;
+}
+
+.logout {
+    background: #d9534f;
+    border: none;
+    padding: 8px 15px;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+/* Contenedor principal */
+.container {
+    padding: 30px;
+    max-width: 700px;
+    margin: auto;
+}
+
+/* Tarjeta Añadir tarea */
+.add-card {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 18px;
+    border-radius: 12px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 18px;
+    transition: 0.3s;
+}
+
+.add-card:hover {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+/* Lista de tareas */
+.task-list {
+    margin-top: 20px;
+}
+
+.task-item {
+    background: rgba(255, 255, 255, 0.12);
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 12px;
+}
+
+.task-item h4 {
+    margin: 0 0 8px;
+}
+
+.task-item small {
+    opacity: 0.8;
+}
+
+/* Modal */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hidden {
+    display: none;
+}
+
+.modal-content {
+    background: #2c0032;
+    padding: 25px;
+    border-radius: 12px;
+    width: 300px;
+}
+
+.modal-content input,
+.modal-content textarea,
+.modal-content select {
+    width: 100%;
+    margin-bottom: 12px;
+    padding: 8px;
+    border-radius: 6px;
+    border: none;
+}
+
+.save {
+    background: #4CAF50;
+    border: none;
+    padding: 8px 15px;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.cancel {
+    background: #d9534f;
+    border: none;
+    padding: 8px 15px;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: space-between;
+}

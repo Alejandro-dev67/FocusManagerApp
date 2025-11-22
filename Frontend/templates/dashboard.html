@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard – FocusManager</title>
+    <link rel="stylesheet" href="/static/css/dashboard.css">
+</head>
+<body>
+
+    <!-- Barra superior -->
+    <header class="top-bar">
+        <h2 class="title">FocusManager</h2>
+        <button id="logoutBtn" class="logout">Cerrar sesión</button>
+    </header>
+
+    <!-- Contenedor principal -->
+    <main class="container">
+
+        <!-- Botón para añadir tarea -->
+        <div id="addTaskCard" class="add-card">
+            + Añadir una tarea
+        </div>
+
+        <!-- Contenedor de tareas -->
+        <div id="taskList" class="task-list"></div>
+
+    </main>
+
+    <!-- Modal crear tarea -->
+    <div id="taskModal" class="modal hidden">
+        <div class="modal-content">
+            <h3>Crear nueva tarea</h3>
+
+            <label>Título</label>
+            <input id="titulo" type="text">
+
+            <label>Descripción</label>
+            <textarea id="descripcion"></textarea>
+
+            <label>Fecha</label>
+            <input id="fecha" type="date">
+
+            <label>Prioridad</label>
+            <select id="prioridad">
+                <option>Alta</option>
+                <option selected>Media</option>
+                <option>Baja</option>
+            </select>
+
+            <div class="modal-actions">
+                <button id="cancelBtn" class="cancel">Cancelar</button>
+                <button id="saveTaskBtn" class="save">Guardar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>FocusManager - Login / Registro</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/login_register.css') }}">
+</head>
+
+<body>
+
+    <div class="project-name">FocusManager</div>
+
+  <div class="container">
+
+    <div class="switcher">
+      <button id="btn-login" class="active">Iniciar Sesión</button>
+      <button id="btn-register">Crear Cuenta</button>
+      <div class="slider"></div>
+    </div>
+
+    <!-- LOGIN -->
+    <form id="form-login" class="form active">
+      <h2>Iniciar Sesión</h2>
+
+      <input type="email" id="login-email" placeholder="Correo" required>
+      <input type="password" id="login-password" placeholder="Contraseña" required>
+
+      <button type="button" id="login-submit">Entrar</button>
+    </form>
+
+    <!-- REGISTER -->
+    <form id="form-register" class="form">
+      <h2>Crear Cuenta</h2>
+
+      <input type="text" id="reg-nombre" placeholder="Nombre Usuario" required>
+      <input type="email" id="reg-email" placeholder="Correo" required>
+      <input type="password" id="reg-password" placeholder="Contraseña" required>
+
+      <button type="button" id="register-submit">Registrar</button>
+    </form>
+
+  </div>
+
+  <script src="{{ url_for('static', filename='js/login_register.js') }}"></script>
+</body>
+</html>
