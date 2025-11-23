@@ -6,10 +6,14 @@
   --muted: #74706C;
   --card: rgba(255,255,255,0.04);
   --card-strong: rgba(0,0,0,0.35);
+  --accent: #2F9E44;
+  --scroll-thumb: rgba(255,255,255,0.08);
+  --scroll-track: rgba(0,0,0,0.08);
 }
 
+/* reset */
 *{box-sizing:border-box}
-html,body{height:100%;margin:0;font-family:Inter, "Segoe UI", Arial; background:var(--bg); color:var(--muted);}
+html,body{height:100%;margin:0;font-family:Inter, "Segoe UI", Arial;background:var(--bg);color:var(--muted);}
 
 /* Top bar */
 .top-bar{
@@ -24,36 +28,46 @@ html,body{height:100%;margin:0;font-family:Inter, "Segoe UI", Arial; background:
 .title{color:var(--text); font-size:22px; margin:0; font-weight:600;}
 .left-title{display:flex; align-items:center; gap:10px;}
 
-/* user button */
+/* USER (fusionado con logout) */
 .user-area{position:relative;}
 .user-btn{
-  background:transparent;
-  border:none;
-  color:var(--muted);
+  background: var(--card-strong);
+  border: 1px solid rgba(255,255,255,0.03);
+  color: var(--text);
   padding:8px 12px;
   border-radius:8px;
   cursor:pointer;
   transition: all .15s ease;
   font-weight:600;
-}
-.user-btn:hover{ background: rgba(255,255,255,0.03); color:var(--text); }
-
-/* dropdown */
-.user-dropdown{
-  position:absolute;
-  right:0;
-  top:46px;
-  background: rgba(0,0,0,0.4);
-  border-radius:8px;
-  padding:8px;
   min-width:140px;
+  text-align:center;
 }
-.user-dropdown button{display:block;width:100%;border:none;background:transparent;color:var(--text);padding:8px;border-radius:6px;cursor:pointer}
-.user-dropdown button:hover{background:rgba(255,255,255,0.03)}
+/* default shows username (white). On hover change background to red and text to 'Cerrar sesión' */
+.user-btn:hover{
+  background: #D9534F;
+  color: white;
+}
+.user-btn[data-logout="true"]{
+  background:#D9534F;
+  color:#fff;
+}
 
 /* Board area */
-.board-wrap{padding:20px;height:calc(100vh - 68px);overflow:hidden;}
-.board-scroll{display:flex; height:100%; gap:18px; align-items:flex-start; overflow-x:auto; padding-bottom:20px;}
+.board-wrap{padding:10px;height:calc(100vh - 88px);overflow:hidden;}
+.board-scroll{
+  display:flex;
+  height:100%;
+  gap:18px;
+  align-items:flex-start;
+  overflow-x:auto;
+  padding:12px;
+}
+
+/* custom scrollbar for horizontal board-scroll */
+.board-scroll::-webkit-scrollbar { height:10px; }
+.board-scroll::-webkit-scrollbar-track { background: var(--scroll-track); border-radius:10px; }
+.board-scroll::-webkit-scrollbar-thumb { background: var(--scroll-thumb); border-radius:10px; }
+.board-scroll { scrollbar-color: var(--scroll-thumb) var(--scroll-track); }
 
 /* Add column */
 .add-column{flex:0 0 auto; display:flex; align-items:flex-start; padding-left:12px;}
@@ -70,14 +84,14 @@ html,body{height:100%;margin:0;font-family:Inter, "Segoe UI", Arial; background:
 }
 .add-card:hover{ transform:translateY(-4px); box-shadow:0 6px 20px rgba(0,0,0,0.6); }
 
-/* Columns container holds date columns horizontally */
-.columns-container{display:flex; gap:18px; padding-left:6px;}
+/* Columns container */
+.columns-container{display:flex; gap:18px; padding-left:6px; align-items:flex-start;}
 
 /* single column */
 .column{
   background: transparent;
   min-width:280px;
-  max-width:320px;
+  max-width:360px;
   flex: 0 0 auto;
   display:flex;
   flex-direction:column;
@@ -105,6 +119,12 @@ html,body{height:100%;margin:0;font-family:Inter, "Segoe UI", Arial; background:
   overflow:auto;
 }
 
+/* custom scrollbar for card-stack (vertical) */
+.card-stack::-webkit-scrollbar { width:9px; }
+.card-stack::-webkit-scrollbar-track { background: var(--scroll-track); border-radius:9px; }
+.card-stack::-webkit-scrollbar-thumb { background: var(--scroll-thumb); border-radius:9px; }
+.card-stack { scrollbar-color: var(--scroll-thumb) var(--scroll-track); }
+
 /* task card */
 .task-card{
   background: var(--card);
@@ -117,7 +137,7 @@ html,body{height:100%;margin:0;font-family:Inter, "Segoe UI", Arial; background:
   flex-direction:column;
   gap:8px;
   cursor:grab;
-  transition: transform .12s ease, box-shadow .12s ease;
+  transition: transform .12s ease, box-shadow .12s ease, background-color .3s ease, opacity .4s ease;
 }
 .task-card.dragging{opacity:0.6; transform:scale(.995);}
 .task-card:hover{ transform:translateY(-4px); box-shadow:0 8px 30px rgba(0,0,0,0.5);}
@@ -147,6 +167,13 @@ html,body{height:100%;margin:0;font-family:Inter, "Segoe UI", Arial; background:
 .icon-btn.del{background:rgba(255,0,0,0.06);color:#ffb3b3}
 .icon-btn.check{background:rgba(0,255,0,0.06);color:#bff3c7}
 
+/* completed style (keeps record in DB, just UI) */
+.task-card.completed{
+  background: rgba(47,158,68,0.12);
+  border: 1px solid rgba(47,158,68,0.25);
+  opacity: 0.95;
+}
+
 /* modal */
 .modal{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.6);padding:20px;z-index:80;opacity:0;pointer-events:none;transition:opacity .18s ease;}
 .modal.show{opacity:1;pointer-events:auto;}
@@ -161,9 +188,11 @@ html,body{height:100%;margin:0;font-family:Inter, "Segoe UI", Arial; background:
 .textarea{min-height:90px;resize:vertical;}
 .modal-actions{display:flex;justify-content:space-between;margin-top:12px;}
 .btn{padding:8px 14px;border-radius:8px;border:none;cursor:pointer}
-.btn.save{background:#2F9E44;color:white}
+.btn.save{background:var(--accent);color:white}
 .btn.cancel{background:#D9534F;color:white}
 
-/* scrollbar small */
-.card-stack::-webkit-scrollbar, .board-scroll::-webkit-scrollbar {height:8px;width:8px}
-.card-stack::-webkit-scrollbar-thumb, .board-scroll::-webkit-scrollbar-thumb {background:rgba(255,255,255,0.06);border-radius:8px}
+/* responsive tweaks */
+@media (max-width:900px){
+  .column{min-width:240px}
+  .modal-box{width:92%}
+}

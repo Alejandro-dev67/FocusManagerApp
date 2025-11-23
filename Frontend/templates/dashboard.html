@@ -7,31 +7,52 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
 </head>
 <body>
+  <!-- TOP BAR -->
   <header class="top-bar">
     <div class="left-title">
       <h1 class="title">FocusManager</h1>
     </div>
 
+    <!-- USER BUTTON -->
     <div class="user-area" id="userArea">
-      <button id="userBtn" class="user-btn">
+      <button id="userBtn" class="user-btn" aria-haspopup="false" title="Usuario">
         <span id="userNameDisplay">Usuario</span>
       </button>
-      <div id="userDropdown" class="user-dropdown hidden">
-        <button id="logoutBtn" class="logout">Cerrar sesión</button>
-      </div>
     </div>
   </header>
 
+  <!-- MAIN: Board + Reports -->
   <main class="board-wrap">
-    <div class="board-scroll" id="boardScroll">
-      <!-- Añadir tarjeta siempre visible -->
-      <div class="column add-column" id="addColumn">
-        <button id="addTaskCard" class="add-card">+ Añadir una tarea</button>
+    <section id="panelDashboard" class="panel show">
+      <div class="board-scroll" id="boardScroll">
+        <div class="column add-column" id="addColumn">
+          <button id="addTaskCard" class="add-card">+ Añadir una tarea</button>
+        </div>
+        <div id="columnsContainer" class="columns-container"></div>
       </div>
 
-      <!-- Columnas por fecha se insertan aquí -->
-      <div id="columnsContainer" class="columns-container"></div>
-    </div>
+      <!-- REPORTS -->
+      <section class="reports">
+        <h2 class="reports-title">Reportes</h2>
+        <div class="filters">
+          <label>Filtrar mes: <select id="filterMonth"></select></label>
+          <label>Filtrar prioridad: 
+            <select id="filterPriorityReports">
+              <option value="all">Todas</option>
+              <option value="Alta">Alta</option>
+              <option value="Media">Media</option>
+              <option value="Baja">Baja</option>
+            </select>
+          </label>
+        </div>
+        <div class="metrics">
+          <div class="metric">Productividad: <span id="metricProductivity">0%</span></div>
+          <div class="metric">Completadas hoy: <span id="metricCompletedToday">0</span></div>
+          <div class="metric">Pendientes: <span id="metricPending">0</span></div>
+        </div>
+        <div id="reportsList" class="reports-list"></div>
+      </section>
+    </section>
   </main>
 
   <!-- Modal crear / editar tarea -->
