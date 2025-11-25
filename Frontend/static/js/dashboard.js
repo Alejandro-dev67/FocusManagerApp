@@ -196,10 +196,11 @@ function renderReportsList(tareas){
   reportsList.innerHTML="";
   Object.keys(groups).sort().forEach(f=>{
     const wrap=document.createElement("div"); wrap.className="reports-list-item";
-    const h=document.createElement("div"); h.style.fontWeight="700"; h.style.color="var(--text)"; h.textContent=f+" — "+groups[f].length+" tareas"; wrap.appendChild(h);
+    const h=document.createElement("div"); h.className="report-title"; h.textContent=f+" — "+groups[f].length+" tareas"; wrap.appendChild(h);
     groups[f].forEach(t=>{
-      const p=document.createElement("div"); p.style.marginTop="6px";
-      const dot=document.createElement("span"); dot.style.display="inline-block"; dot.style.width="10px"; dot.style.height="10px"; dot.style.borderRadius="50%"; dot.style.marginRight="8px"; dot.style.verticalAlign="middle"; dot.className="prio "+(t.prioridad==='Alta'?'high':t.prioridad==='Media'?'medium':'low');
+      const p=document.createElement("div"); p.className="report-row";
+      const dot=document.createElement("span"); dot.className="prio "+(t.prioridad==='Alta'?'high':t.prioridad==='Media'?'medium':'low');
+      dot.style.width="10px"; dot.style.height="10px"; dot.style.display="inline-block"; dot.style.marginRight="8px"; dot.style.verticalAlign="middle";
       const strong=document.createElement("strong"); strong.style.color="var(--text)"; strong.textContent=t.titulo;
       const status=document.createElement("span"); status.style.marginLeft="8px"; status.innerHTML=t.completada?'<span style="color:var(--accent)">Completada</span>':'Pendiente';
       p.appendChild(dot); p.appendChild(strong); p.appendChild(document.createTextNode(' — ')); p.appendChild(status);

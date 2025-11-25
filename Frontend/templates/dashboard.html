@@ -22,7 +22,9 @@
   </header>
 
   <!-- MAIN: Board + Reports -->
+  <!-- Nota: body tiene overflow-y:auto para scroll general -->
   <main class="board-wrap">
+    <!-- PANEL DASHBOARD (columnas) -->
     <section id="panelDashboard" class="panel show">
       <div class="board-scroll" id="boardScroll">
         <div class="column add-column" id="addColumn">
@@ -30,28 +32,40 @@
         </div>
         <div id="columnsContainer" class="columns-container"></div>
       </div>
+    </section>
 
-      <!-- REPORTS -->
-      <section class="reports">
-        <h2 class="reports-title">Reportes</h2>
-        <div class="filters">
-          <label>Filtrar mes: <select id="filterMonth"></select></label>
-          <label>Filtrar prioridad: 
-            <select id="filterPriorityReports">
-              <option value="all">Todas</option>
-              <option value="Alta">Alta</option>
-              <option value="Media">Media</option>
-              <option value="Baja">Baja</option>
-            </select>
-          </label>
+    <!-- PANEL REPORTES (siempre debajo, visible con scroll general) -->
+    <section class="reports" id="reportsSection" aria-label="Reportes">
+      <div class="reports-inner">
+        <div class="reports-header">
+          <h2 class="reports-title">Reportes</h2>
         </div>
-        <div class="metrics">
-          <div class="metric">Productividad: <span id="metricProductivity">0%</span></div>
-          <div class="metric">Completadas hoy: <span id="metricCompletedToday">0</span></div>
-          <div class="metric">Pendientes: <span id="metricPending">0</span></div>
+
+        <div class="reports-controls">
+          <div class="filters">
+            <label>Filtrar mes:
+              <select id="filterMonth"></select>
+            </label>
+
+            <label>Filtrar prioridad:
+              <select id="filterPriorityReports">
+                <option value="all">Todas</option>
+                <option value="Alta">Alta</option>
+                <option value="Media">Media</option>
+                <option value="Baja">Baja</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="metrics">
+            <div class="metric">Productividad: <span id="metricProductivity">0%</span></div>
+            <div class="metric">Pendientes: <span id="metricPending">0</span></div>
+          </div>
         </div>
-        <div id="reportsList" class="reports-list"></div>
-      </section>
+
+        <!-- Lista de reportes: caja con scrollbar vertical propia cuando se llena -->
+        <div id="reportsList" class="reports-list" role="region" aria-live="polite"></div>
+      </div>
     </section>
   </main>
 
