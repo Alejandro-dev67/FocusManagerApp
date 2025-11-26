@@ -1,8 +1,10 @@
+/* Colores del login */
 :root {
   --dark: #0E1210;
   --light: #F1F0EA;
 }
 
+/* Fondo claro y centrado del formulario */
 body {
   background: var(--light);
   font-family: Poppins, sans-serif;
@@ -12,6 +14,7 @@ body {
   height: 100vh;
 }
 
+/* Contenedor principal de la pantalla de login y registro */
 .container {
   width: 380px;
   background: var(--dark);
@@ -22,6 +25,7 @@ body {
   position: relative;
 }
 
+/* Switch de login y registro */
 .switcher {
   display: flex;
   position: relative;
@@ -31,6 +35,7 @@ body {
   margin-bottom: 25px;
 }
 
+/* Botones del switch */
 .switcher button {
   flex: 1;
   padding: 10px;
@@ -42,6 +47,7 @@ body {
   z-index: 2;
 }
 
+/* Deslizador visual del switch */
 .switcher .slider {
   position: absolute;
   width: 50%;
@@ -53,20 +59,17 @@ body {
   transition: 0.3s;
 }
 
-.switcher button.active {
-  color: var(--dark);
-}
-
+/* Form activo/inactivo */
 .form {
   display: none;
   flex-direction: column;
   gap: 12px;
 }
-
 .form.active {
   display: flex;
 }
 
+/* Inputs del formulario */
 input {
   padding: 12px;
   border-radius: 10px;
@@ -75,6 +78,7 @@ input {
   color: var(--light);
 }
 
+/* Botón principal */
 button {
   padding: 12px;
   border: none;
@@ -85,6 +89,7 @@ button {
   cursor: pointer;
 }
 
+/* focusmanager en la esquina */
 .project-name {
     position: absolute;
     top: 20px;

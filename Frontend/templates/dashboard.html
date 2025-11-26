@@ -1,19 +1,25 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+  <!-- Configuración de la página -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Dashboard | FocusManager</title>
+
+  <!-- Cargar el CSS -->
   <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
 </head>
 <body>
-  <!-- TOP BAR -->
+
+  <!-- Barra superior -->
   <header class="top-bar">
+
+    <!-- Nombre del proyecto -->
     <div class="left-title">
       <h1 class="title">FocusManager</h1>
     </div>
 
-    <!-- USER BUTTON -->
+    <!-- Botón del usuario -->
     <div class="user-area" id="userArea">
       <button id="userBtn" class="user-btn" aria-haspopup="false" title="Usuario">
         <span id="userNameDisplay">Usuario</span>
@@ -21,27 +27,40 @@
     </div>
   </header>
 
-  <!-- MAIN: Board + Reports -->
-  <!-- Nota: body tiene overflow-y:auto para scroll general -->
+  <!-- Contenedor principal -->
   <main class="board-wrap">
-    <!-- PANEL DASHBOARD (columnas) -->
+
+    <!-- Panel de tareas -->
     <section id="panelDashboard" class="panel show">
+
+      <!-- Área desplazable del tablero -->
       <div class="board-scroll" id="boardScroll">
+
+        <!-- Botón para crear nueva tarea -->
         <div class="column add-column" id="addColumn">
           <button id="addTaskCard" class="add-card">+ Añadir una tarea</button>
         </div>
+
+        <!-- Contenedor de columnas -->
         <div id="columnsContainer" class="columns-container"></div>
       </div>
     </section>
 
-    <!-- PANEL REPORTES (siempre debajo, visible con scroll general) -->
+    <!-- Panel de reportes -->
     <section class="reports" id="reportsSection" aria-label="Reportes">
+
+      <!-- Contenido interno de reportes -->
       <div class="reports-inner">
+
+        <!-- Título de reportes -->
         <div class="reports-header">
           <h2 class="reports-title">Reportes</h2>
         </div>
 
+        <!-- Filtros de reportes -->
         <div class="reports-controls">
+
+          <!-- Filtros de selección -->
           <div class="filters">
             <label>Filtrar mes:
               <select id="filterMonth"></select>
@@ -57,23 +76,27 @@
             </label>
           </div>
 
+          <!-- Métricas -->
           <div class="metrics">
             <div class="metric">Productividad: <span id="metricProductivity">0%</span></div>
             <div class="metric">Pendientes: <span id="metricPending">0</span></div>
           </div>
         </div>
 
-        <!-- Lista de reportes: caja con scrollbar vertical propia cuando se llena -->
+        <!-- Lista de reportes -->
         <div id="reportsList" class="reports-list" role="region" aria-live="polite"></div>
       </div>
     </section>
   </main>
 
-  <!-- Modal crear / editar tarea -->
+  <!-- Modal para crear o editar tareas -->
   <div id="taskModal" class="modal hidden" role="dialog" aria-modal="true">
     <div class="modal-box" id="modalBox">
+
+      <!-- Título del modal -->
       <h3 class="modal-title">Crear nueva tarea</h3>
 
+      <!-- Inputs -->
       <label class="label">Título</label>
       <input id="titulo" class="input" type="text" maxlength="120">
 
@@ -90,6 +113,7 @@
         <option value="Baja">Baja</option>
       </select>
 
+      <!-- Botones del modal -->
       <div class="modal-actions">
         <button id="cancelBtn" class="btn cancel">Cancelar</button>
         <button id="saveTaskBtn" class="btn save">Guardar</button>
@@ -97,6 +121,7 @@
     </div>
   </div>
 
+  <!-- Cargar JS -->
   <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
 </body>
 </html>

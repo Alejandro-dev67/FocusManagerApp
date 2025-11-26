@@ -2,23 +2,27 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
+
+  <!-- hoja de estilos del login -->
   <title>FocusManager - Login / Registro</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/login_register.css') }}">
 </head>
 
 <body>
 
+    <!-- nombre de la app -->
     <div class="project-name">FocusManager</div>
 
   <div class="container">
 
+    <!-- botones para cambiar entre login y registro -->
     <div class="switcher">
       <button id="btn-login" class="active">Iniciar Sesión</button>
       <button id="btn-register">Crear Cuenta</button>
       <div class="slider"></div>
     </div>
 
-    <!-- LOGIN -->
+    <!-- formulario de inicio de sesión -->
     <form id="form-login" class="form active">
       <h2>Iniciar Sesión</h2>
 
@@ -28,7 +32,7 @@
       <button type="button" id="login-submit">Entrar</button>
     </form>
 
-    <!-- REGISTER -->
+    <!-- formulario de registro -->
     <form id="form-register" class="form">
       <h2>Crear Cuenta</h2>
 
@@ -41,6 +45,7 @@
 
   </div>
 
+  <!-- script del login/register -->
   <script src="{{ url_for('static', filename='js/login_register.js') }}"></script>
 </body>
 </html>
